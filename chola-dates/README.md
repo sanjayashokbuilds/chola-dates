@@ -3,8 +3,8 @@
 Re-dating medieval Chola kings from the astronomical clues carved into their
 temple inscriptions, with an explicit model of scribal errors.
 
-> Status: **work in progress** (24-hour build, Oct 2026). Solver, dataset, validation
-> and the accession model are done; demo app next.
+> Status: **24-hour build, Oct 2026.** Solver, dataset, validation, accession model and
+> demo app are done; final polish in progress.
 
 ## Headline results
 
@@ -132,12 +132,26 @@ June 1198 but with low confidence (0.25).
 error, two candidates appear: 2 Jan 1192 (fortnight wrong; Kielhorn's answer) and
 16 Jan 1192 (nakshatra wrong). Choosing between them is the detective's job.
 
+## Demo app
+
+```bash
+streamlit run streamlit_app.py
+```
+
+- **Solve**: enter any inscription's clues (or load one of the 24) and get every matching
+  day, with near-misses that would mean one carving error.
+- **Detective**: the accession posterior, the votes, and P(miscarved) for every inscription;
+  switch to Kielhorn's tithi convention and watch the answer widen.
+- **Map**: the 18 inscription sites across the Chola country, stepped through the reign by
+  regnal year (site positions are approximate, village level).
+- **Sky**: the sun, moon, tithi and nakshatra over Thanjavur on any day in 1170–1230.
+
 ## Run it
 
 ```bash
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-pytest                         # 52 tests
+pytest                         # 53 tests, including the app
 python scripts/validate.py     # dataset vs Kielhorn
 python scripts/calibrate.py    # frame calibration
 python scripts/detective.py    # accession model, charts, robustness (~30 s)

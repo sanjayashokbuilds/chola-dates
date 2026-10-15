@@ -43,11 +43,13 @@ def get_ayanamsa() -> str:
     return _ayanamsa if _shift == 0 else f"{_ayanamsa}{_shift:+.2f}"
 
 
-# PROVISIONAL default: Lahiri shifted by -1.5 deg. With this shift both the
-# sunrise and the sunset rule reproduce Kielhorn's solar-day numbers for the
-# two dates checked so far (No. 60, 2 Jan 1192 = Makara 8; No. 16, 21 Nov 1197
-# = day 25). To be recalibrated on the full dataset in the validation stage.
-DEFAULT_AYANAMSA = ("lahiri", -1.5)
+# Default: Lahiri shifted by -1.69 deg, calibrated so that our sankrantis (the
+# moments the sun enters a sign) match the five sankranti times Kielhorn
+# publishes for 1193-1225 (EI IV No.16; VI No.44; VIII Nos.91, 110, 116):
+# required shifts -1.46 to -1.81 deg, mean -1.69, s.d. 0.14. See
+# scripts/calibrate.py. Kielhorn computed with the traditional Surya-siddhanta,
+# whose sun drifts slowly against modern astronomy, so this is era-specific.
+DEFAULT_AYANAMSA = ("lahiri", -1.69)
 
 set_ayanamsa(*DEFAULT_AYANAMSA)
 

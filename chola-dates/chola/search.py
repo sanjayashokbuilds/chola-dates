@@ -27,9 +27,11 @@ def _parse(clues: dict) -> dict:
     if clues.get("solar_day"):
         out["solar_day"] = int(clues["solar_day"])
     if clues.get("tithi"):
-        if not clues.get("paksha"):
-            raise ValueError("A tithi needs its paksha (shukla or krishna)")
-        out["tithi"] = p.tithi_number(clues["paksha"], int(clues["tithi"]))
+        t = int(clues["tithi"])
+        if clues.get("paksha"):
+            out["tithi"] = {p.tithi_number(clues["paksha"], t)}
+        else:  # fortnight not stated: either half of the month
+            out["tithi"] = {t, 15 + t}
     if clues.get("nakshatra"):
         out["nakshatra"] = p.nakshatra_index(clues["nakshatra"])
     if clues.get("weekday"):
@@ -37,8 +39,15 @@ def _parse(clues: dict) -> dict:
     return out
 
 
+# Kielhorn's solar-day numbers come from the traditional Surya-siddhanta sun,
+# whose sankranti times differ from ours by a few hours, sign-dependently.
+# Against his 20 published solar-day numbers: 15 match exactly, all 20 within
+# one day (tests/test_solver.py). So a stated solar day is accepted +/- 1.
+SOLAR_DAY_TOLERANCE = 1
+
+
 def check_clues(cal: pd.DataFrame, clues: dict, mode: str = "day",
-                month_rule: str = "set") -> pd.DataFrame:
+                month_rule: str = "set", solar_day_tolerance: int = SOLAR_DAY_TOLERANCE) -> pd.DataFrame:
     """
     For every day in the calendar table, whether each clue holds (True/False).
     Returns one boolean column per clue given, plus `n_mismatch`.
@@ -48,12 +57,12 @@ def check_clues(cal: pd.DataFrame, clues: dict, mode: str = "day",
     if "solar_month" in c:
         res["solar_month"] = cal[f"sign_{month_rule}"] == c["solar_month"]
     if "solar_day" in c:
-        res["solar_day"] = cal[f"sday_{month_rule}"] == c["solar_day"]
+        res["solar_day"] = (cal[f"sday_{month_rule}"] - c["solar_day"]).abs() <= solar_day_tolerance
     if "tithi" in c:
         if mode == "sunrise":
-            res["tithi"] = cal["tithi"] == c["tithi"]
+            res["tithi"] = cal["tithi"].isin(c["tithi"])
         else:
-            res["tithi"] = cal["tithis"].apply(lambda ts: c["tithi"] in ts)
+            res["tithi"] = cal["tithis"].apply(lambda ts: bool(c["tithi"] & set(ts)))
     if "nakshatra" in c:
         if mode == "sunrise":
             res["nakshatra"] = cal["nakshatra"] == c["nakshatra"]

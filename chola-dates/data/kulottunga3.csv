@@ -1,0 +1,25 @@
+id,ei_no,source,place,regnal_year,saka_year,solar_month,solar_day,paksha,tithi,nakshatra,weekday,kielhorn_date,kielhorn_verdict,kielhorn_error_field,kielhorn_error_detail,notes
+K3-16,16,EI IV p.219,"Nellore, Ranganayaka temple",19,1119,Vrischika,15,,,Revati,Friday,1197-11-21,error,solar_day;regnal_year,"15th solar day for 25th; 19th year for 20th",Saka 1119 Pingala also given
+K3-17,17,EI IV p.219,"Srirangam, Ranganatha temple",19,,Vrischika,,krishna,5,Pushya,Tuesday,1196-11-12,correct,,,
+K3-18,18,EI IV p.220,"Tirumalavadi, Vaidyanatha temple",34,,Kanya,,shukla,10,Shravana,Monday,1211-09-19,correct,,,King named Tribhuvanaviradeva
+K3-19,19,EI IV p.220,"Manimangalam, Rajagopala-Perumal temple",12,,Dhanu,,krishna,9,Chitra,Monday,1189-12-04,correct,,,
+K3-23,23,EI IV p.264,"Tiruvenkadu, Svetaranyesvara temple",8,,Karka,,shukla,10,Anuradha,Monday,1185-07-08,correct,,,
+K3-24,24,EI IV p.265,"Kadappori, near Madurantakam",16,,Mithuna,10,,4,Mula,Saturday,1194-06-04,error,tithi,4th tithi for 14th,Month given as Ani; no fortnight stated
+K3-29,29,EI V p.198,"Manimangalam, Dharmesvara temple",29,,Mina,,shukla,7,Mrigashira,Wednesday,1207-03-07,correct,,,Regnal year partly restored: 2[9]
+K3-30,30,EI V p.199,"Uttaramallur, Vaikuntha-Perumal temple",37,,Mithuna,,shukla,9,Hasta,Sunday,1215-06-07,correct,,,King named Tribhuvanaviradeva
+K3-31,31,EI V p.199,"Manimangalam, Rajagopala-Perumal temple",20,,Vrishabha,,shukla,10,Swati,Thursday,,unresolved,,"'Quite incorrect' for the 20th year; only 25 May 1200 (22nd year) roughly fits, with Chitra not Swati",
+K3-44,44,EI VI p.281,"Conjeeveram, Ekamranatha temple",27,,Vrishabha,11,,,Anuradha,Thursday,1205-05-05,correct,,,Month given as Vaigasi
+K3-60,60,EI VII p.6,"Somangalam, Somanathesvara temple",14,,Makara,,shukla,1,Pushya,Thursday,1192-01-02,error,paksha,first fortnight for second,Kielhorn: impossible as written
+K3-90,90,EI VIII p.4,"Aridvaramangalam, Patalisvara temple",10,,Makara,,krishna,5,Uttara Bhadrapada,Tuesday,1188-01-05,error,paksha,second fortnight for first,Kielhorn: intrinsically wrong; alternatively nakshatra
+K3-91,91,EI VIII p.5,"Tiruvannamalai, Arunachalesvara temple",35,,Mithuna,8,,,Anuradha,Sunday,1213-06-02,correct,,,King named Tribhuvanaviradeva
+K3-92,92,EI VIII p.5,"Tiruvalanjuli, Kapardisvara temple",36,,Mesha,,shukla,3,Rohini,Monday,1214-04-14,correct,,,
+K3-93,93,EI VIII p.6,"Kalappal, Kailasanatha temple",37,,Vrischika,21,shukla,14,Krittika,Monday,1214-11-17,correct,,,Kielhorn: 14th tithi began about sunrise
+K3-94,94,EI VIII p.6,"Tiruvalanjuli, Kapardisvara temple",39,,Kumbha,,krishna,1,Magha,Wednesday,1217-01-25,correct,,,
+K3-107,107,EI VIII No.26,"Vedaranyam, Vedaranyesvara temple",4,,Mina,,shukla,5,Rohini,Thursday,1182-03-11,correct,,,
+K3-108,108,EI VIII No.26,"Ramagiri, Valisvara temple",6,,Karka,,krishna,12,Rohini,Thursday,1184-07-05,error,tithi,12th tithi for 11th,King named Virarajendra-Choladeva
+K3-109,109,EI VIII No.26,"Ramagiri, Valisvara temple",6,,Karka,,krishna,12,Rohini,Thursday,1184-07-05,error,tithi,12th tithi for 11th,"Kielhorn: practically identical with No. 108, same mistake; partly damaged"
+K3-110,110,EI VIII No.26,"Tiruvakkarai, Chandramaulisvara temple",16,,Makara,24,krishna,9,Anuradha,Monday,1194-01-17,correct,,,
+K3-111,111,EI VIII No.26,"Vedaranyam, Vedaranyesvara temple",20,,Vrishabha,9,krishna,11,Uttara Ashadha,Sunday,1198-05-03,error,nakshatra,Uttara Ashadha for Uttara Bhadrapada,Kielhorn: Uttiradam for Uttirattadi
+K3-112,112,EI VIII No.26,"Kalla-Perumbur, Kailasanathasvamin temple",23,,Vrischika,,krishna,13,Vishakha,Monday,1200-11-06,correct,,,No error noted
+K3-113,113,EI VIII No.26,"Kalla-Perumbur, Kailasanathasvamin temple",25,,Karka,,shukla,5,Uttara Phalguni,Wednesday,1202-07-24,error,tithi,5th tithi for 4th,
+K3-114,114,EI VIII No.26,"Vedaranyam, Vedaranyesvara temple",32,,Dhanu,,krishna,9,Chitra,Monday,1209-12-21,error,tithi,9th tithi for 8th,King named Tribhuvanaviradeva

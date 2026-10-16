@@ -10,7 +10,7 @@ The best start dates explain **18 of 24** inscriptions with no error: **6 Jul 11
 
 ## 2. Bayesian model
 
-- Most likely accession: **6 Jul 1178**
+- Top days: **6–8 Jul 1178**, equally likely (each about a quarter, 75% together); the evidence cannot separate them
 - 50% credible interval: **6 Jul 1178 – 8 Jul 1178**
 - 95% credible interval: **16 Jun 1178 – 24 Jul 1178**
 - Estimated error rate per carved clue: **0.090** (about 1 in 11)
@@ -50,11 +50,11 @@ The best start dates explain **18 of 24** inscriptions with no error: **6 Jul 11
 
 ## 3. Robustness
 
-| assumption                                                           | most likely   | 50% interval              | 95% interval              |   eps (mean) |   log10 Bayes factor vs main | flagged (P>0.5)                                                   |
-|:---------------------------------------------------------------------|:--------------|:--------------------------|:--------------------------|-------------:|-----------------------------:|:------------------------------------------------------------------|
-| Main: during-day tithi/nakshatra, structured errors, year error 5%   | 6 Jul 1178    | 6 Jul 1178 – 8 Jul 1178   | 16 Jun 1178 – 24 Jul 1178 |        0.09  |                          0   | 16, 24, 31, 60, 90, 111                                           |
-| Kielhorn's practice: tithi at sunrise, nakshatra any time in the day | 17 Jun 1178   | 11 Jun 1178 – 26 Jun 1178 | 8 Jun 1178 – 8 Jul 1178   |        0.139 |                         -6.4 | 16, 24, 31, 60, 90, 93, 108, 109, 111, 113, 114                   |
-| Sunrise-only tithi and nakshatra                                     | 7 Jul 1178    | 17 Jun 1178 – 8 Jul 1178  | 8 Jun 1178 – 11 Sep 1178  |        0.221 |                        -16.4 | 16, 23, 24, 31, 60, 90, 91, 93, 108, 109, 110, 111, 112, 113, 114 |
-| Every wrong value equally likely (no error structure)                | 6 Jul 1178    | 6 Jul 1178 – 7 Jul 1178   | 6 Jul 1178 – 11 Sep 1178  |        0.092 |                         -1   | 16, 24, 31, 60, 90, 111                                           |
-| Regnal-year error 2%                                                 | 7 Jul 1178    | 6 Jul 1178 – 7 Jul 1178   | 6 Jul 1178 – 24 Jul 1178  |        0.093 |                          0.1 | 16, 24, 31, 60, 90, 111                                           |
-| Regnal-year error 10%                                                | 6 Jul 1178    | 6 Jul 1178 – 8 Jul 1178   | 8 Jun 1178 – 11 Sep 1178  |        0.088 |                         -0.2 | 16, 24, 31, 60, 90, 111                                           |
+| assumption                                                           | top days (tied)      | 50% interval              | 95% interval              |   eps (mean) |   log10 Bayes factor vs main | flagged (P>0.5)                                                   |
+|:---------------------------------------------------------------------|:---------------------|:--------------------------|:--------------------------|-------------:|-----------------------------:|:------------------------------------------------------------------|
+| Main: during-day tithi/nakshatra, structured errors, year error 5%   | 6–8 Jul 1178 (75%)   | 6 Jul 1178 – 8 Jul 1178   | 16 Jun 1178 – 24 Jul 1178 |        0.09  |                          0   | 16, 24, 31, 60, 90, 111                                           |
+| Kielhorn's practice: tithi at sunrise, nakshatra any time in the day | 17–26 Jun 1178 (46%) | 11 Jun 1178 – 26 Jun 1178 | 8 Jun 1178 – 8 Jul 1178   |        0.139 |                         -6.4 | 16, 24, 31, 60, 90, 93, 108, 109, 111, 113, 114                   |
+| Sunrise-only tithi and nakshatra                                     | 7–8 Jul 1178 (12%)   | 17 Jun 1178 – 8 Jul 1178  | 8 Jun 1178 – 11 Sep 1178  |        0.221 |                        -16.4 | 16, 23, 24, 31, 60, 90, 91, 93, 108, 109, 110, 111, 112, 113, 114 |
+| Every wrong value equally likely (no error structure)                | 6–8 Jul 1178 (76%)   | 6 Jul 1178 – 7 Jul 1178   | 6 Jul 1178 – 11 Sep 1178  |        0.092 |                         -1   | 16, 24, 31, 60, 90, 111                                           |
+| Regnal-year error 2%                                                 | 6–8 Jul 1178 (83%)   | 6 Jul 1178 – 7 Jul 1178   | 6 Jul 1178 – 24 Jul 1178  |        0.093 |                          0.1 | 16, 24, 31, 60, 90, 111                                           |
+| Regnal-year error 10%                                                | 6–8 Jul 1178 (62%)   | 6 Jul 1178 – 8 Jul 1178   | 8 Jun 1178 – 11 Sep 1178  |        0.088 |                         -0.2 | 16, 24, 31, 60, 90, 111                                           |

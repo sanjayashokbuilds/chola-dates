@@ -27,8 +27,9 @@ This project rebuilds that work computationally, for one king, Kulottunga III:
 
 ## Results
 
-- **Kulottunga III most likely came to the throne on 6 July 1178** (50% credible interval 6–8 July; 95% interval
-  16 June – 24 July 1178). This independently reproduces Kielhorn's final conclusion (*EI* VIII, 1906: "about 6–8 July 1178").
+- **Kulottunga III came to the throne between 6 and 8 July 1178.** Those three days are equally likely (about 25% each,
+  75% together; the evidence cannot separate them), and the 95% credible interval is 16 June – 24 July 1178. This
+  independently reproduces Kielhorn's final conclusion (*EI* VIII, 1906: "about 6–8 July 1178").
 - The solver reproduces **all 14** dates Kielhorn judged correct; each is the only matching day in its regnal year.
 - The model flags as miscarved **exactly** the five inscriptions whose errors Kielhorn diagnosed by hand, and names the
   same error each time: two swapped fortnights, a wrong nakshatra, a 4 carved for a 14, and a 15 for a 25 together with
@@ -72,15 +73,15 @@ likely true date. A simpler "votes" method (how many inscriptions each *A* expla
 
 **Robustness.** The answer barely moves when the assumptions change:
 
-| Assumption | Most likely | 50% interval | Flagged as miscarved |
+| Assumption | Top days (tied) | 95% interval | Flagged as miscarved |
 |---|---|---|---|
-| Main model | 6 Jul 1178 | 6–8 Jul | 16, 24, 31, 60, 90, 111 |
-| Every wrong value equally likely | 6 Jul | 6–7 Jul | same |
-| Regnal-year error 2% / 10% | 7 Jul / 6 Jul | 6–7 Jul / 6–8 Jul | same |
-| Kielhorn's practice (tithi at sunrise) | 17 Jun | 11–26 Jun | + 93, 108, 109, 113, 114 (Bayes factor 10^−6.4) |
+| Main model | 6–8 Jul 1178 (75%) | 16 Jun – 24 Jul | 16, 24, 31, 60, 90, 111 |
+| Every wrong value equally likely | 6–8 Jul (76%) | 6 Jul – 11 Sep | same |
+| Regnal-year error 2% / 10% | 6–8 Jul (83% / 62%) | 6 Jul – 24 Jul / 8 Jun – 11 Sep | same |
+| Kielhorn's practice (tithi at sunrise) | 17–26 Jun (46%) | 8 Jun – 8 Jul | + 93, 108, 109, 113, 114 (Bayes factor 10^−6.4) |
 
 **Checks.** Weekdays of 38/38 dated Chola inscriptions in Kielhorn's summary list (*EI* VII pp. 6–8); a modern tithi
-boundary matched to a published panchang to the minute; 53 automated tests, including the app.
+boundary matched to a published panchang to the minute; 54 automated tests, including the app.
 
 ## The app
 
@@ -110,7 +111,7 @@ scripts/
   validate.py         solver vs Kielhorn -> results/validation.md
   detective.py        accession model, robustness, charts -> results/detective.md
 streamlit_app.py    the app (with app/visuals.py)
-tests/              53 tests
+tests/              54 tests
 examples/no60.py    the worked example
 ```
 
@@ -119,7 +120,7 @@ examples/no60.py    the worked example
 ```bash
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-pytest                         # 53 tests
+pytest                         # 54 tests
 python scripts/validate.py     # dataset vs Kielhorn
 python scripts/detective.py    # accession model, charts, robustness (~30 s)
 streamlit run streamlit_app.py # the app

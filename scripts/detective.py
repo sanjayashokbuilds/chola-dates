@@ -43,6 +43,15 @@ def nice(n):
     return f"{d} {['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][m-1]} {y}"
 
 
+def top_range(post):
+    """'6–8 Jul 1178 (75%)': days tied for the highest probability, and their combined probability."""
+    a, b, mass = post.top_days()
+    (ya, ma, da), (yb, mb, db) = astro.date_from_day_number(a), astro.date_from_day_number(b)
+    months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+    span = f"{da}–{db} {months[mb-1]} {yb}" if (ya, ma) == (yb, mb) else f"{nice(a)} – {nice(b)}"
+    return span if a != b else nice(a), mass
+
+
 def setup():
     df = dataset.load("kulottunga3")
     a0, a1 = (astro.day_number(*d) for d in GRID)
@@ -112,7 +121,7 @@ def main():
         flagged = [x["id"] for x in (dt.explain(cal, ev, p2, acc_idx) for ev in e2) if x["p_miscarved"] > 0.5]
         a, b = p2.interval(0.95)
         c, d = p2.interval(0.5)
-        rob.append({"assumption": name, "most likely": nice(p2.mode()),
+        rob.append({"assumption": name, "top days (tied)": f"{top_range(p2)[0]} ({top_range(p2)[1]:.0%})",
                     "50% interval": f"{nice(c)} – {nice(d)}", "95% interval": f"{nice(a)} – {nice(b)}",
                     "eps (mean)": round(float(p2.eps @ p2.eps_grid), 3),
                     "log10 Bayes factor vs main": round((p2.log_evidence - post.log_evidence) / np.log(10), 1),
@@ -150,7 +159,7 @@ def main():
     ax.set_xticks(ticks, ["1 Jun 1178", "1 Jul", "1 Aug", "1 Sep"])
     ax.set_xlim(-1, z1 - z0 + 1)
     ax.set_ylabel("probability", color=MUTED, fontsize=9)
-    ax.set_title(f"Kulottunga III's accession: most likely {nice(post.mode())} "
+    ax.set_title(f"Kulottunga III's accession: {top_range(post)[0]}, three equally likely days "
                  f"(95%: {nice(lo95)} – {nice(hi95)})", loc="left", fontsize=11, color=INK)
     ax.legend(frameon=False, fontsize=8, loc="upper right")
     style(ax)
@@ -193,7 +202,8 @@ def main():
                 f"**{nice(top.min())} – {nice(top.max())}** (one unbroken run). "
                 f"Kielhorn (EI VIII, 1906): about 6–8 July 1178.\n\n![votes](votes.png)\n\n")
         f.write("## 2. Bayesian model\n\n")
-        f.write(f"- Most likely accession: **{nice(post.mode())}**\n")
+        f.write(f"- Top days: **{top_range(post)[0]}**, equally likely (each about a quarter, "
+                f"{top_range(post)[1]:.0%} together); the evidence cannot separate them\n")
         f.write(f"- 50% credible interval: **{nice(lo50)} – {nice(hi50)}**\n")
         f.write(f"- 95% credible interval: **{nice(lo95)} – {nice(hi95)}**\n")
         f.write(f"- Estimated error rate per carved clue: **{eps_mean:.3f}** (about 1 in {round(1/eps_mean)})\n\n")

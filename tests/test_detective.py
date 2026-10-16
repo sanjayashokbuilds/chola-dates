@@ -35,6 +35,14 @@ def test_posterior_50pct_inside_kielhorn_window(model):
     assert lo >= astro.day_number(1178, 7, 6) and hi <= astro.day_number(1178, 7, 8)
 
 
+def test_top_days_are_6_to_8_july(model):
+    # 6, 7 and 8 July 1178 are tied; reporting one of them alone would be rounding noise.
+    _, _, post, _ = model
+    a, b, mass = post.top_days()
+    assert (a, b) == (astro.day_number(1178, 7, 6), astro.day_number(1178, 7, 8))
+    assert 0.7 < mass < 0.8
+
+
 def test_flags_exactly_kielhorns_genuine_errors(model):
     cal, evs, post, acc_idx = model
     res = {ev.id: dt.explain(cal, ev, post, acc_idx) for ev in evs}

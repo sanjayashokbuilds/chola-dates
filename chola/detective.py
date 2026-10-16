@@ -194,6 +194,17 @@ class Posterior:
     def mode(self) -> int:
         return int(self.acc_n[np.argmax(self.accession)])
 
+    def top_days(self, rel: float = 0.9) -> tuple:
+        """
+        The run of days whose probability is within `rel` of the maximum, as
+        (first day, last day, combined probability). For Kulottunga III, 6, 7 and
+        8 July 1178 are tied to within 0.03 percentage points, so naming a single
+        "most likely" day would be reporting rounding noise.
+        """
+        pa = self.accession
+        keep = np.nonzero(pa >= rel * pa.max())[0]
+        return int(self.acc_n[keep.min()]), int(self.acc_n[keep.max()]), float(pa[keep].sum())
+
 
 def fit(cal: pd.DataFrame, evs: list, acc_idx: np.ndarray,
         eps_grid=np.linspace(0.01, 0.30, 30), eps_year: float = 0.05) -> Posterior:

@@ -135,7 +135,7 @@ def verdict(mode: str = "day"):
                      "verdict": r["kielhorn_verdict"], "kielhorn_date": r["kielhorn_date"] or "–",
                      "p": round(x["p_miscarved"], 3), "date": best["date"], "p_date": round(best["prob"], 2),
                      "wrong": best["wrong"]})
-    return {"acc_n": post.acc_n, "acc_p": post.accession, "votes": votes, "mode": post.mode(),
+    return {"acc_n": post.acc_n, "acc_p": post.accession, "votes": votes, "top": post.top_days(),
             "i50": post.interval(0.5), "i95": post.interval(0.95), "eps": float(post.eps @ post.eps_grid),
             "log_ev": post.log_evidence, "table": pd.DataFrame(rows).sort_values("no"), "alts": alts}
 
@@ -162,6 +162,12 @@ def short_range(a, b):
     if (ya, ma) == (yb, mb):
         return f"{da}–{db} {MONTHS[ma-1]}"
     return f"{da} {MONTHS[ma-1]} – {db} {MONTHS[mb-1]}"
+
+
+def top_label(D):
+    """'6–8 Jul 1178': the run of days tied for the highest probability."""
+    a, b, _ = D["top"]
+    return f"{short_range(a, b)} {ymd(b)[0]}" if a != b else nice(a)
 
 
 def jdate(n):
@@ -266,7 +272,7 @@ with left:
                 '12th and 13th centuries to turn those clues back into dates, and works out when King Kulottunga III '
                 'took the throne, even though some of the stone carvers made mistakes.</div>', unsafe_allow_html=True)
     st.markdown(f"""<div class="chips">
-      <div class="chip"><b>{nice(det['mode'])}</b><small>when Kulottunga III most likely became king</small></div>
+      <div class="chip"><b>{top_label(det)}</b><small>when Kulottunga III became king: three equally likely days</small></div>
       <div class="chip"><b>24 stones</b><small>dated inscriptions decoded, from Nellore to Vedaranyam</small></div>
       <div class="chip"><b>5 mistakes</b><small>found in the carvings: the same five a scholar found by hand in 1900</small></div>
       <div class="chip"><b>4 that weren't</b><small>old "mistakes" that turn out to follow a consistent rule</small></div>
@@ -387,7 +393,8 @@ with t_story:
                  "Each correctly carved inscription says “the reign began within this particular 12-month window”. "
                  "Line up all 24 windows and look for the start date that fits the most stones.")
             card("The answer", f"18 of the 24 stones agree with no errors at all on a start date of 6–8 July 1178. "
-                               f"Weighing all 24, mistakes included:", big=f"{nice(D['mode'])}", kind="gold")
+                               f"Weighing all 24, mistakes included, those three days come out equally likely, "
+                               f"{D['top'][2]:.0%} together:", big=top_label(D), kind="gold")
             st.markdown(f'<p class="note">Very likely between {short_range(*D["i50"])} 1178; almost certainly between '
                         f'{short_range(*D["i95"])} 1178. Kielhorn, after a decade of work on these dates (1906): '
                         f'“about 6–8 July 1178”.</p>', unsafe_allow_html=True)
@@ -533,10 +540,10 @@ with t_try:
 with t_verdict:
     D = det
     st.markdown("#### When did Kulottunga III become king?")
-    st.markdown(f'<p class="lede" style="max-width:none">Most likely on <b style="color:#e8b04a">{nice(D["mode"])}</b>. '
-                f'There is a 50% chance it was between {short_range(*D["i50"])} 1178, and a 95% chance between '
-                f'{short_range(*D["i95"])} 1178. Franz Kielhorn concluded “about 6–8 July 1178” in 1906.</p>',
-                unsafe_allow_html=True)
+    st.markdown(f'<p class="lede" style="max-width:none">Between <b style="color:#e8b04a">{top_label(D)}</b>. '
+                f'Those three days are equally likely, {D["top"][2]:.0%} together; the evidence cannot separate them. '
+                f'There is a 95% chance the reign began between {short_range(*D["i95"])} 1178. '
+                f'Franz Kielhorn concluded “about 6–8 July 1178” in 1906.</p>', unsafe_allow_html=True)
     zoom = (D["acc_n"] >= astro.day_number(1178, 5, 15)) & (D["acc_n"] <= astro.day_number(1178, 9, 15))
     k3 = tuple(jdate(astro.day_number(*d)) for d in K1903)
     k6 = tuple(jdate(astro.day_number(*d)) for d in K1906)
@@ -570,7 +577,7 @@ with t_verdict:
         K = verdict("kielhorn")
         bf = (D["log_ev"] - K["log_ev"]) / np.log(10)
         m1, m2, m3 = st.columns(3)
-        m1.metric("Most likely start", nice(K["mode"]))
+        m1.metric("Top days", top_label(K))
         m2.metric("50% interval", short_range(*K["i50"]))
         m3.metric("Inscriptions flagged", int((K["table"]["p"] > 0.5).sum()))
         st.markdown(f'<p class="note">Under Kielhorn\'s sunrise rule the model needs 11 faulty stones instead of 6, '
@@ -661,7 +668,7 @@ reign, and every clue was carved either correctly or wrongly. Wrong clues tend t
 fortnights, a neighbouring star group, a slipped digit). Adding up the evidence from all 24 stones gives a probability
 for every start date, the carvers' error rate, and the chance each stone was miscarved. This is Bayesian inference.
 
-**Checks.** 53 automated tests; the weekdays of 38 dated Chola inscriptions; a modern almanac matched to the minute;
+**Checks.** 54 automated tests; the weekdays of 38 dated Chola inscriptions; a modern almanac matched to the minute;
 the answer barely moves when the assumptions change.
 """)
     with b:
